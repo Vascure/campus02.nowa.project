@@ -11,6 +11,7 @@ public class App {
     private boolean exit = false;
     private int figureNr;
     private Figure figure;
+     private int scaleSize;
 
     // Konstruktor
     // input wird verwendet um Daten vom Benutzer einzulesen (verwendet scanner)
@@ -45,31 +46,59 @@ public class App {
         //TODO: Benutzereingaben verarbeiten
 
         switch (figureNr){
-            case 1:
-                figure = new FigureH();
+            case 0:
+                exit= true;
                 break;
+            case 1:
+                figure = new FigureH(scaleSize);
+                break;
+            case 2:
+                figure= new FigureL(scaleSize);
+                break;
+            case 3:
+                figure=new FigureO(scaleSize);
+                break;
+            case 4:
+                figure=new FigureO2(scaleSize);
+                break;
+            case 5:
+                figure= new FigureI(scaleSize);
+                break;
+            case 6:
+                figure= new FigureMinus(scaleSize);
             default: break;
         }
+
     }
 
     private void printState() {
         //TODO: Ausgabe des aktuellen Zustands
-        if (figure != null){
+        if (exit== true) {
+            System.out.println("Goodbye!");}
+           else if (figure != null){
             output.println(figure);
         }
-    }
+        }
+
 
     private void inputFigure() {
         // Hier sehen Sie ein Pattern für Benutzereingaben
         // Solange kein gültiger Wert eingegeben wurde, wird die Eingabe wiederholt
         do {
-            output.println("Welche Grafik möchten Sie anzeigen (1-6)");
+            output.println("Welche Grafik möchten Sie anzeigen (1-6),");
             figureNr = input.nextInt();
-            if (figureNr < 1 || figureNr > 6) {
+            System.out.println("Welche Größe möchten Sie wählen?");
+            scaleSize=input.nextInt();
+            if (figureNr < 0 || figureNr > 6) {
                 output.println("Dies ist keine gültige Grafik!");
             } else {
                 break;
             }
         } while (true);
+
+        }
+
     }
-}
+
+
+
